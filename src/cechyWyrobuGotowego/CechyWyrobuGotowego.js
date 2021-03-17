@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Layout, PageHeader, Form, Input, Button, Checkbox, Select, TreeSelect, Cascader } from 'antd';
+import { Layout, PageHeader, Card, Descriptions, Form, Input, Button, InputNumber, Select, Radio, TreeSelect, Cascader } from 'antd';
 //import { MailOutlined, AppstoreOutlined, ApartmentOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { DataProvider } from './DataProvider'
@@ -28,16 +28,29 @@ export const CechyWyrobuGotowego = () => {
     }, [])
     return (
         <div className="ant-layout main" data-wyrob-id={idWyrobu}>
+            <div className="ant-page-header-heading-title">Cechy wyrobu gotowego</div>
+            <div className="ant-page-header-heading-sub-title">{"dotyczy produktu " + idWyrobu}</div>
             {/* <Layout.Header>Header</Layout.Header> */}
-            <Layout.Content className="ant-layout">
-                <PageHeader
+            {/* <Layout.Content className=""> */}
+                {/* <PageHeader
                     className="site-page-header"
                     //onBack={() => null}
                     title="Cechy wyrobu gotowego"
                     subTitle={"dotyczy produktu " + idWyrobu}
-                />
-                <EdytujCechyWyrobu />
-            </Layout.Content>
+                /> */}
+                {/* <Card title="Cechy wyrobu gotowego" bordered={false} style={{ width: 300 }}>
+                    <p>{"dotyczy produktu " + idWyrobu}</p>
+                    <p>Card content</p>
+                    <p>Card content</p>
+                </Card> */}
+                {/* <p>
+                <Descriptions title="User Info">
+                    <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
+                    
+                </Descriptions>
+                </p> */}
+            {/* </Layout.Content> */}
+            <EdytujCechyWyrobu />
         </div>
     )
 }
@@ -52,7 +65,13 @@ const EdytujCechyWyrobu = () => {
 
     const layout = {
         labelCol: { span: 8 },
-        wrapperCol: { span: 16 },
+        wrapperCol: { span: 8 },
+    };
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 8,
+        },
     };
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -63,6 +82,7 @@ const EdytujCechyWyrobu = () => {
     };
 
     return (
+        <div style={{ width: 1000 + 'px' }}>
         <Form
             {...layout}
             name="basic"
@@ -70,23 +90,33 @@ const EdytujCechyWyrobu = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
-            <Form.Item
+            {/* <Form.Item
                 label="Username"
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' }]}
             >
                 <Input />
-            </Form.Item>
+            </Form.Item> */}
             <TekstInput 
                 label={cecha.etykietaPl}
                 name={cecha.nazwa}
             />
-            <Form.Item label="Select">
-                <Select>
-                    <Select.Option value="demo">Demo</Select.Option>
-                </Select>
-            </Form.Item>
-            <Form.Item label="TreeSelect">
+                <Form.Item label="Dennica górna (typ)">
+                    <Select>
+                        <Select.Option value="opcja1">opcja1</Select.Option>
+                        <Select.Option value="opcja2">opcja2</Select.Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item label="Grubość dennicy górnej">
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item label="Barierka" name="barierka">
+                    <Radio.Group>
+                        <Radio.Button value="tak">Tak</Radio.Button>
+                        <Radio.Button value="nie">Nie</Radio.Button>
+                    </Radio.Group>
+                </Form.Item>
+            {/* <Form.Item label="TreeSelect">
                 <TreeSelect
                     treeData={[
                         {
@@ -101,8 +131,8 @@ const EdytujCechyWyrobu = () => {
                         },
                     ]}
                 />
-            </Form.Item>
-            <Form.Item label="Cascader">
+            </Form.Item> */}
+            {/* <Form.Item label="Cascader">
                 <Cascader
                     options={[
                         {
@@ -117,7 +147,14 @@ const EdytujCechyWyrobu = () => {
                         },
                     ]}
                 />
-            </Form.Item>        </Form>
+            </Form.Item> */}
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="button">
+                        Zapisz
+        </Button>
+                </Form.Item>
+            </Form>
+        </div>
     )
 }
 

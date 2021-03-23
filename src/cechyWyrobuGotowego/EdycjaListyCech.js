@@ -82,11 +82,11 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
-                <TekstInput
+                {/* <TekstInput
                     label={listaCechMock[0].etykietaPl}
                     name={listaCechMock[0].nazwa}
-                />
-                <ListaWyboru 
+                /> */}
+                {/* <ListaWyboru 
                     label="Lista wyboru"
                     name="nazwa_lista"
                     value="value2"
@@ -95,8 +95,8 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                         { value: "value2", label: "label2" },
                         { value: "value3", label: "label3" },
                     ]}
-                />
-                <RadioInput
+                /> */}
+                {/* <RadioInput
                     label="Lista radio"
                     name="nazwa_radio"
                     value="nie wiem"
@@ -105,22 +105,22 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                         { value: "nie", label: "nie" },
                         { value: "nie wiem", label: "nie wiem" },
                     ]}
-                />
-                <Form.Item label="Dennica górna (typ)">
+                /> */}
+                {/* <Form.Item label="Dennica górna (typ)">
                     <Select>
                         <Select.Option value="opcja1">opcja1</Select.Option>
                         <Select.Option value="opcja2">opcja2</Select.Option>
                     </Select>
-                </Form.Item>
-                <Form.Item label="Grubość dennicy górnej">
+                </Form.Item> */}
+                {/* <Form.Item label="Grubość dennicy górnej">
                     <InputNumber />
-                </Form.Item>
-                <Form.Item label="Barierka" name="barierka">
+                </Form.Item> */}
+                {/* <Form.Item label="Barierka" name="barierka">
                     <Radio.Group>
                         <Radio.Button value="tak">Tak</Radio.Button>
                         <Radio.Button value="nie">Nie</Radio.Button>
                     </Radio.Group>
-                </Form.Item>
+                </Form.Item> */}
                 <hr/>
                 {definicjeCech.map(switchInputType) }
                 <hr />

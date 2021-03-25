@@ -2,7 +2,7 @@ import { Form, Input, Button, InputNumber, Select, Radio } from 'antd';
 
 export const EdycjaListyCech = ({ params, callbacks }) => {
 
-    const {definicjeCech} = params
+    const { definicjeCech, cechyWyrobu} = params
 
     const layout = {
         labelCol: { span: 8 },
@@ -24,6 +24,7 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
     };
 
     const switchInputType = cecha => {
+        const value = cechyWyrobu[cecha.nazwa]
         if (cecha.typDanych === 'LICZBA'){
             let definicja = {}
             if (cecha.definicja) definicja = JSON.parse(cecha.definicja)
@@ -82,11 +83,11 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
-                {/* <TekstInput
+                <TekstInput
                     label={listaCechMock[0].etykietaPl}
                     name={listaCechMock[0].nazwa}
-                /> */}
-                {/* <ListaWyboru 
+                />
+                <ListaWyboru 
                     label="Lista wyboru"
                     name="nazwa_lista"
                     value="value2"
@@ -95,7 +96,7 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                         { value: "value2", label: "label2" },
                         { value: "value3", label: "label3" },
                     ]}
-                /> */}
+                />
                 {/* <RadioInput
                     label="Lista radio"
                     name="nazwa_radio"

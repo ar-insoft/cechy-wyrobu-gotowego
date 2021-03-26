@@ -1,9 +1,14 @@
+import React, { useEffect, useRef } from 'react';
 import { Form, Input, Button, InputNumber, Select, Radio } from 'antd';
 
 export const EdycjaListyCech = ({ params, callbacks }) => {
 
     const { definicjeCech, cechyWyrobu} = params
-
+    const formRef = useRef()
+    useEffect(() => {
+        formRef.current.setFieldsValue(cechyWyrobu)
+    }, [cechyWyrobu])
+    //formRef.current.setFieldsValue(
     const layout = {
         labelCol: { span: 8 },
         wrapperCol: { span: 8 },
@@ -24,11 +29,14 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
     };
 
     const switchInputType = cecha => {
-        const value = cechyWyrobu[cecha.nazwa]
+        console.log('switchInputType cechyWyrobu', cechyWyrobu)
+        const value = cechyWyrobu ? cechyWyrobu[cecha.nazwa] : null
+        console.log('switchInputType cecha.nazwa/value', cecha.nazwa, value)
+
         if (cecha.typDanych === 'LICZBA'){
             let definicja = {}
             if (cecha.definicja) definicja = JSON.parse(cecha.definicja)
-            console.log('switchInputType LICZBA.definicja', typeof (cecha.definicja), cecha.definicja, definicja)
+            //console.log('switchInputType LICZBA.definicja', typeof (cecha.definicja), cecha.definicja, definicja)
             return (
                 <LiczbaInput key={cecha.nazwa} {...definicja}
                     label={cecha.etykietaPl}
@@ -37,20 +45,12 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
             )
         }
         if (cecha.typDanych === 'LISTA') {
-            const opcje = 
-                [
-                    { "value": "value1", "label": "label1" },
-                    { "value": "value2", "label": "label2" },
-                    { "value": "value3", "label": "label3" }
-                ]
             let definicja = {}
             if (cecha.definicja) {definicja = JSON.parse(cecha.definicja)}
             return (
                 <ListaWyboru key={cecha.nazwa} {...definicja}
                     label={cecha.etykietaPl}
                     name={cecha.nazwa}
-                    value="value2"
-                    //opcje={opcje}
                 />
             )
         }
@@ -61,8 +61,6 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                 <RadioInput key={cecha.nazwa} {...definicja}
                     label={cecha.etykietaPl}
                     name={cecha.nazwa}
-                    //value="value2"
-                //opcje={opcje}
                 />
             )
         }
@@ -70,24 +68,25 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
             <TekstInput key={cecha.etykietaPl}
                 label={cecha.etykietaPl}
                 name={cecha.nazwa}
+                //{...(value ? { initialValue: value } : {})}
             />
         )
     }
 
     return (
         <div style={{ width: 100 + '%' }}>
-            <Form
+            <Form ref={formRef} size="small"
                 {...layout}
                 //name="lista_cech"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
-                <TekstInput
+                {/* <TekstInput
                     label={listaCechMock[0].etykietaPl}
                     name={listaCechMock[0].nazwa}
-                />
-                <ListaWyboru 
+                /> */}
+                {/* <ListaWyboru 
                     label="Lista wyboru"
                     name="nazwa_lista"
                     value="value2"
@@ -96,7 +95,7 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                         { value: "value2", label: "label2" },
                         { value: "value3", label: "label3" },
                     ]}
-                />
+                /> */}
                 {/* <RadioInput
                     label="Lista radio"
                     name="nazwa_radio"
@@ -124,7 +123,7 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                 </Form.Item> */}
                 <hr/>
                 {definicjeCech.map(switchInputType) }
-                <hr />
+                {/* <hr /> */}
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
                         Zapisz                    
@@ -145,6 +144,7 @@ const listaCechMock = [
 ]
 
 const TekstInput = (props) => {
+    console.log('TekstInput', props)
     return (
         <Form.Item
             {...props} key={props.name}
@@ -155,7 +155,7 @@ const TekstInput = (props) => {
 }
 
 const LiczbaInput = (props) => {
-    console.log('LiczbaInput', props)
+    //console.log('LiczbaInput', props)
     return (
         <Form.Item {...props} key={props.name}>
             <InputNumber {...props} />

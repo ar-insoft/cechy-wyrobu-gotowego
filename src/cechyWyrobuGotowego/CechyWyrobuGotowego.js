@@ -66,12 +66,12 @@ export const CechyWyrobuGotowego = () => {
             <div className="ant-page-header-heading-sub-title">
                 numer rysunku: <span style={{ color: 'black' }}>{product.object_drawing_no}</span>
             </div>
-            <div className="ant-page-header-heading-sub-title">
+            {/* <div className="ant-page-header-heading-sub-title">
                 użytego w zleceniach: {zleceniaWyrobu.map(
                     zl => <span style={{ marginLeft: 15 +'px' }, {color: 'black'}}>
                         {zl.object_index} {zl.title}
                     </span>)}
-            </div>
+            </div> */}
             {/* <Layout.Header>Header</Layout.Header> */}
             {/* <Layout.Content className=""> */}
                 {/* <PageHeader

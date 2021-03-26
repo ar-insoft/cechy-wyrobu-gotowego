@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.11](https://github.com/ar-insoft/cechy-wyrobu-gotowego/compare/v0.7.10...v0.8.11) (2021-03-26)
+
 ### [0.7.10](https://github.com/ar-insoft/cechy-wyrobu-gotowego/compare/v0.6.9...v0.7.10) (2021-03-25)
 
 ### [0.6.9](https://github.com/ar-insoft/cechy-wyrobu-gotowego/compare/v0.5.8...v0.6.9) (2021-03-25)

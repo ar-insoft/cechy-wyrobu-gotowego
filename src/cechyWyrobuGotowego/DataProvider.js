@@ -57,7 +57,6 @@ export const DataProvider = {
                 const fromServer = json
                 //console.log('RaportujLaser.wyslijNaSerwer fromServer', fromServer)
                 //if (fromServer.employee)
-                this.employee = fromServer.employee
 
                 promiseHandler(fromServer)
             })

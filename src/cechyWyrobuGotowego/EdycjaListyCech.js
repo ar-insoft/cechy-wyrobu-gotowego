@@ -3,7 +3,7 @@ import { Form, Input, Button, InputNumber, Select, Radio } from 'antd';
 
 export const EdycjaListyCech = ({ params, callbacks }) => {
 
-    const { definicjeCech, cechyWyrobu} = params
+    const { isLoading, definicjeCech, cechyWyrobu} = params
     const formRef = useRef()
     useEffect(() => {
         formRef.current.setFieldsValue(cechyWyrobu)
@@ -29,9 +29,9 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
     };
 
     const switchInputType = cecha => {
-        console.log('switchInputType cechyWyrobu', cechyWyrobu)
-        const value = cechyWyrobu ? cechyWyrobu[cecha.nazwa] : null
-        console.log('switchInputType cecha.nazwa/value', cecha.nazwa, value)
+        //console.log('switchInputType cechyWyrobu', cechyWyrobu)
+        //const value = cechyWyrobu ? cechyWyrobu[cecha.nazwa] : null
+        //console.log('switchInputType cecha.nazwa/value', cecha.nazwa, value)
 
         if (cecha.typDanych === 'LICZBA'){
             let definicja = {}
@@ -75,7 +75,7 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
 
     return (
         <div style={{ width: 100 + '%' }}>
-            <Form ref={formRef} size="small"
+            <Form ref={formRef} size="small" loading={isLoading.toString()}
                 {...layout}
                 //name="lista_cech"
                 initialValues={{ remember: true }}
@@ -125,7 +125,15 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
                 {definicjeCech.map(switchInputType) }
                 {/* <hr /> */}
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                    {
+                        definicjeCech.length === 0 &&
+                        <div style={{ color: 'red' }}>
+                            Moduł nie został poprawnie skonfigurowany.
+                            <br />Aby nadawać wyrobom cechy należy wcześniej zdefinionać listę cech.
+                        </div>
+                    }
+                    
+                    <Button type="primary" htmlType="submit" disabled={definicjeCech.length ===0}>
                         Zapisz                    
                     </Button>
                 </Form.Item>
@@ -134,17 +142,8 @@ export const EdycjaListyCech = ({ params, callbacks }) => {
     )
 }
 
-const listaCechMock = [
-    {
-        "typDanych": "TEKST",
-        "etykietaEn": "Nr rysunku",
-        "nazwa": "nr_rysunku",
-        "etykietaPl": "Nr rysunku"
-    },
-]
-
 const TekstInput = (props) => {
-    console.log('TekstInput', props)
+    //console.log('TekstInput', props)
     return (
         <Form.Item
             {...props} key={props.name}
